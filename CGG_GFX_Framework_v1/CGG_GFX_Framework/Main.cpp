@@ -37,6 +37,15 @@ int main(int argc, char *argv[])
 	// Draws a single pixel at the specified coordinates in the specified colour!
 	CGG::DrawPixel( pixelX, pixelY, red, green, blue );
 
+	int sinx, siny;
+	for (int i = 0; i < 360; i++)
+	{
+		siny = sin(i);
+		pixelX = i;
+		pixelY = siny;
+		CGG::DrawPixel(pixelX, pixelY, red, green, blue);
+	}
+
 	// Do any other DrawPixel calls here
 	// ...
 
