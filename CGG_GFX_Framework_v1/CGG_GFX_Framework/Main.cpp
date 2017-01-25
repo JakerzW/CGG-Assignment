@@ -8,8 +8,8 @@
 int main(int argc, char *argv[])
 {
 	// Variables for storing window dimensions
-	int windowWidth = 640;
-	int windowHeight = 480;
+	int windowWidth = 1280;
+	int windowHeight = 720;
 
 	// Call CGG::Init to initialise and create your window
 	// Tell it what size you want the window to be
@@ -36,18 +36,22 @@ int main(int argc, char *argv[])
 	
 	// Draws a single pixel at the specified coordinates in the specified colour!
 	CGG::DrawPixel( pixelX, pixelY, red, green, blue );
-
-	int sinx, siny;
+	
+	for (size_t i = 0; i < 100; i++)
+	{
+		pixelX++;
+		pixelY++;
+		CGG::DrawPixel(pixelX, pixelY, red, green, blue);
+	}
+	/*int sinx, siny;
 	for (int i = 0; i < 360; i++)
 	{
 		siny = sin(i);
 		pixelX = i;
 		pixelY = siny;
 		CGG::DrawPixel(pixelX, pixelY, red, green, blue);
-	}
+	}*/
 
-	// Do any other DrawPixel calls here
-	// ...
 
 	// Displays drawing to screen and holds until user closes window
 	// You must call this after all your drawing calls
@@ -83,5 +87,33 @@ int main(int argc, char *argv[])
 	
 	return 0;
 	*/
+	
+}
+
+void menu()
+{
+	
+}
+
+void setBackgroundColour()
+{
+	//enter case statement for choosing colour (maybe like 5/6 options)
+	CGG::SetBackground(0, 0, 0);
+}
+
+void setLineColour()
+{
+	//same as background colour
+	int red = 255;
+	int green = 0;
+	int blue = 0;
+}
+
+void prepareToDraw()
+{
+	int windowWidth = 1280;
+	int windowHeight = 720;
+	int pixelX = windowWidth / 2;
+	int pixelY = windowHeight / 2;
 	
 }
