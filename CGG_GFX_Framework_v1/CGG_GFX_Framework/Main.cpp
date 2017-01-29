@@ -11,12 +11,16 @@ void setBackgroundColour();
 
 int prepareToDraw(int shapeNumber);
 
-int drawVerticalLine(int startPointX, int startPointY, bool directionUp, int size);
-int drawHorizontalLine(int startPointX, int startPointY, bool directionRight, int size);
-int drawSquare(int startPointX, int startPointY, int size);
-int drawLine(int startPointX, int startPointY, int size );
+void drawVerticalLine(int startPointX, int startPointY, bool directionUp, int size);
+void drawHorizontalLine(int startPointX, int startPointY, bool directionRight, int size);
+void drawSquare(int startPointX, int startPointY, int size);
+void drawLine(int startPointX, int startPointY, int size );
+void drawTriangle(int startPointX, int startPointY, int size);
+void drawCircle(int startPointX, int startPointY, int size);
 
 int red, green, blue, pixelX, pixelY;
+int windowWidth = 640;
+int windowHeight = 640;
 
 int main(int argc, char *argv[])
 {
@@ -179,8 +183,8 @@ int setSize()
 int prepareToDraw(int shapeNumber)
 {
 	int size = 0;
-	int windowWidth = 640;
-	int windowHeight = 640;
+	windowWidth = 640;
+	windowHeight = 640;
 	pixelX = windowWidth / 2;
 	pixelY = windowHeight / 2;
 
@@ -199,22 +203,21 @@ int prepareToDraw(int shapeNumber)
 	switch (shapeNumber)
 	{
 		case 1:
-		{
 			drawLine(pixelX, pixelY, size);
-		}
-		break;
+			break;
 		case 2:
-		{
 			drawSquare(pixelX, pixelY, size);
-		}
-		break;
+			break;
+		case 3:
+			drawCircle(pixelX, pixelY, size);
+			break;
 		deafult:
 			CGG::DrawPixel(pixelX, pixelY, red, green, blue);
 	}
-	return 0;
+	return CGG::ShowAndHold();
 }
 
-int drawHorizontalLine(int startPointX, int startPointY, bool directionRight, int size)
+void drawHorizontalLine(int startPointX, int startPointY, bool directionRight, int size)
 {
 	for (int i = 0; i < size; i++)
 	{
@@ -224,10 +227,9 @@ int drawHorizontalLine(int startPointX, int startPointY, bool directionRight, in
 			pixelX++;
 		CGG::DrawPixel(pixelX, pixelY, red, green, blue);
 	}
-	return 0;
 }
 
-int drawVerticalLine(int startPointX, int startPointY, bool directionUp, int size)
+void drawVerticalLine(int startPointX, int startPointY, bool directionUp, int size)
 {
 	for (int i = 0; i < size; i++)
 	{
@@ -237,10 +239,22 @@ int drawVerticalLine(int startPointX, int startPointY, bool directionUp, int siz
 			pixelY++;
 		CGG::DrawPixel(pixelX, pixelY, red, green, blue);
 	}
-	return 0;
 }
 
-int drawLine(int startPointX, int startPointY, int size)
+void drawDiagonalLine(int startPointX, int startPointY, bool directionLeft, int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		if (!directionLeft)
+			pixelX++;
+		else
+			pixelX--;
+		pixelY++;
+		CGG::DrawPixel(pixelX, pixelY, red, green, blue);
+	}
+}
+
+void drawLine(int startPointX, int startPointY, int size)
 {
 	pixelY = pixelY + (size/2);
 	pixelX = pixelX - (size/2);
@@ -250,10 +264,9 @@ int drawLine(int startPointX, int startPointY, int size)
 		pixelX++;
 		CGG::DrawPixel(pixelX, pixelY, red, green, blue);
 	}
-	return CGG::ShowAndHold();
 }
 
-int drawSquare(int startPointX, int startPointY, int size)
+void drawSquare(int startPointX, int startPointY, int size)
 {
 	pixelY = pixelY + (size / 2);
 	pixelX = pixelX - (size / 2);
@@ -261,7 +274,47 @@ int drawSquare(int startPointX, int startPointY, int size)
 	drawVerticalLine(pixelX, pixelY, false, size);
 	drawHorizontalLine(pixelX, pixelY, false, size);
 	drawVerticalLine(pixelX, pixelY, true, size);
-	return CGG::ShowAndHold();
+}
+
+void drawTriangle(int startPointX, int startPointY, int size)
+{
+
+}
+
+void drawCircle(int startPointX, int startPointY, int size)
+{
+	int x = size;
+	int y = 0;
+	int z = 0;
+
+	while (x >= y)
+	{
+		CGG::DrawPixel((pixelX + x), (pixelY + y), red, green, blue);
+		CGG::DrawPixel((pixelX + y), (pixelY + x), red, green, blue);
+		CGG::DrawPixel((pixelX - y), (pixelY + x), red, green, blue);
+		CGG::DrawPixel((pixelX - x), (pixelY + y), red, green, blue);
+		CGG::DrawPixel((pixelX - x), (pixelY - y), red, green, blue);
+		CGG::DrawPixel((pixelX - y), (pixelY - x), red, green, blue);
+		CGG::DrawPixel((pixelX + y), (pixelY - x), red, green, blue);
+		CGG::DrawPixel((pixelX + x), (pixelY - y), red, green, blue);
+
+		if (z <= 0)
+		{
+			y += 1;
+			z += 2 * y + 1;
+		}
+		if (z > 0)
+		{
+			y -= 1;
+			z -= 2 * x + 1;
+		}
+	}
+	//return CGG::ShowAndHold();
+}
+
+/*int drawSineWave(int startPointX, int startPointY, int size)
+{
+
 }
 
 
