@@ -5,13 +5,16 @@
 #include "CGG_Main.h"
 
 int menu();
+
 void setLineColour();
 void setBackgroundColour();
-int drawLine(int startPointX, int startPointY);
-int drawHorizontalLine(int startPointX, int startPointY);
-int drawSquare(int startPointX, int startPointY);
-int drawVerticalLine(int startPointX, int startPointY);
+
 int prepareToDraw(int shapeNumber);
+
+int drawVerticalLine(int startPointX, int startPointY, bool directionUp, int size);
+int drawHorizontalLine(int startPointX, int startPointY, bool directionRight, int size);
+int drawSquare(int startPointX, int startPointY, int size);
+int drawLine(int startPointX, int startPointY, int size );
 
 int red, green, blue, pixelX, pixelY;
 
@@ -66,8 +69,10 @@ void setLineColour()
 		if ((colourChoice > 0) && (colourChoice < 8))
 			optionValid = true;
 		else
+		{
 			std::cout << "That is not a valid input, try again.";
-		system("PAUSE");
+			system("PAUSE");
+		}
 	}
 
 	switch (colourChoice)
@@ -133,12 +138,12 @@ void setLineColour()
 
 int setSize()
 {
-	int sizeValue;
-	bool optionValid;
+	int returnValue, sizeValue;
+	bool optionValid = false;
 	while (!optionValid)
 	{
 		system("CLS");
-		std::cout << "Sizes:\n1. Tiny     2. Small\n3. Big     4. Massive\n";
+		std::cout << "Sizes:\n1. Tiny     2. Small\n3. Big      4. Massive\n";
 		std::cout << "Choose a size: ";
 		std::cin >> sizeValue;
 		if ((sizeValue < 5) || (sizeValue > 0))
@@ -149,12 +154,31 @@ int setSize()
 			system("PAUSE");
 		}
 	}
-	return sizeValue;
+
+	switch (sizeValue)
+	{
+		case 1:
+			returnValue = 10;
+			break;
+		case 2: 
+			returnValue = 50;
+			break;
+		case 3:
+			returnValue = 200;
+			break;
+		case 4:
+			returnValue = 500;
+			break;
+		default: 
+			returnValue = 100;
+	}
+
+	return returnValue;	
 }
 
 int prepareToDraw(int shapeNumber)
 {
-
+	int size = 0;
 	int windowWidth = 640;
 	int windowHeight = 640;
 	pixelX = windowWidth / 2;
@@ -162,6 +186,7 @@ int prepareToDraw(int shapeNumber)
 
 	setBackgroundColour();
 	setLineColour();
+	size = setSize();
 
 	if (!CGG::Init(windowWidth, windowHeight))
 	{
@@ -175,12 +200,12 @@ int prepareToDraw(int shapeNumber)
 	{
 		case 1:
 		{
-			drawLine(pixelX, pixelY);
+			drawLine(pixelX, pixelY, size);
 		}
 		break;
 		case 2:
 		{
-			drawSquare(pixelX, pixelY);
+			drawSquare(pixelX, pixelY, size);
 		}
 		break;
 		deafult:
@@ -189,9 +214,9 @@ int prepareToDraw(int shapeNumber)
 	return 0;
 }
 
-int drawHorizontalLine(int startPointX, int startPointY, bool directionRight)
+int drawHorizontalLine(int startPointX, int startPointY, bool directionRight, int size)
 {
-	for (size_t i = 0; i < 100; i++)
+	for (int i = 0; i < size; i++)
 	{
 		if (!directionRight)
 			pixelX--;
@@ -202,9 +227,9 @@ int drawHorizontalLine(int startPointX, int startPointY, bool directionRight)
 	return 0;
 }
 
-int drawVerticalLine(int startPointX, int startPointY, bool directionUp)
+int drawVerticalLine(int startPointX, int startPointY, bool directionUp, int size)
 {
-	for (size_t i = 0; i < 100; i++)
+	for (int i = 0; i < size; i++)
 	{
 		if (!directionUp)
 			pixelY--;
@@ -217,9 +242,9 @@ int drawVerticalLine(int startPointX, int startPointY, bool directionUp)
 
 int drawLine(int startPointX, int startPointY, int size)
 {
-	pixelY = pixelY - 100;
-	pixelX = pixelX - 100;
-	for (size_t i = 0; i < 200; i++)
+	pixelY = pixelY + (size/2);
+	pixelX = pixelX - (size/2);
+	for (int i = 0; i < size; i++)
 	{
 		pixelY++;
 		pixelX++;
@@ -230,10 +255,12 @@ int drawLine(int startPointX, int startPointY, int size)
 
 int drawSquare(int startPointX, int startPointY, int size)
 {
-	drawHorizontalLine(pixelX, pixelY, true);
-	drawVerticalLine(pixelX, pixelY, false);
-	drawHorizontalLine(pixelX, pixelY, false);
-	drawVerticalLine(pixelX, pixelY, true);
+	pixelY = pixelY + (size / 2);
+	pixelX = pixelX - (size / 2);
+	drawHorizontalLine(pixelX, pixelY, true, size);
+	drawVerticalLine(pixelX, pixelY, false, size);
+	drawHorizontalLine(pixelX, pixelY, false, size);
+	drawVerticalLine(pixelX, pixelY, true, size);
 	return CGG::ShowAndHold();
 }
 

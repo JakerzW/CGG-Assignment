@@ -1,7 +1,5 @@
 ﻿  Main.cpp
-c:\users\jaker\documents\github\cgg-assignment\cgg_gfx_framework_v1\cgg_gfx_framework\main.cpp(23): warning C4101: 'menuChoice': unreferenced local variable
-c:\users\jaker\documents\github\cgg-assignment\cgg_gfx_framework_v1\cgg_gfx_framework\main.cpp(186): warning C4102: 'deafult': unreferenced label
-c:\users\jaker\documents\github\cgg-assignment\cgg_gfx_framework_v1\cgg_gfx_framework\main.cpp(138): warning C4700: uninitialized local variable 'optionValid' used
-Main.obj : error LNK2019: unresolved external symbol "int __cdecl drawLine(int,int)" (?drawLine@@YAHHH@Z) referenced in function "int __cdecl prepareToDraw(int)" (?prepareToDraw@@YAHH@Z)
-Main.obj : error LNK2019: unresolved external symbol "int __cdecl drawSquare(int,int)" (?drawSquare@@YAHHH@Z) referenced in function "int __cdecl prepareToDraw(int)" (?prepareToDraw@@YAHH@Z)
-C:\Users\Jaker\Documents\GitHub\CGG-Assignment\CGG_GFX_Framework_v1\Debug\CGG_GFX_Framework.exe : fatal error LNK1120: 2 unresolved externals
+c:\users\jaker\onedrive\documents\github\cgg-assignment\cgg_gfx_framework_v1\cgg_gfx_framework\main.cpp(26): warning C4101: 'menuChoice': unreferenced local variable
+c:\users\jaker\onedrive\documents\github\cgg-assignment\cgg_gfx_framework_v1\cgg_gfx_framework\main.cpp(211): warning C4102: 'deafult': unreferenced label
+  CGG_GFX_Framework.vcxproj -> C:\Users\Jaker\OneDrive\Documents\GitHub\CGG-Assignment\CGG_GFX_Framework_v1\Debug\CGG_GFX_Framework.exe
+  CGG_GFX_Framework.vcxproj -> C:\Users\Jaker\OneDrive\Documents\GitHub\CGG-Assignment\CGG_GFX_Framework_v1\Debug\CGG_GFX_Framework.pdb (Full PDB)
