@@ -1,15 +1,19 @@
 #include <cmath>
+#include <stdio.h>
 #include <iostream>
 #include <iomanip>
 #include <math.h>
+#include <Windows.h>
 #include "CGG_Main.h"
 
+//initiating the functions
 int menu();
-
+void menuCheck(int optionChosen);
 void setLineColour();
 void setBackgroundColour();
 
 int prepareToDraw(int shapeNumber);
+
 
 void drawVerticalLine(int startPointX, int startPointY, bool directionUp, int size);
 void drawHorizontalLine(int startPointX, int startPointY, bool directionRight, int size);
@@ -19,9 +23,11 @@ void drawAnyLine(int sPointX, int sPointY, int ePointX, int ePointY);
 void drawTriangle();
 void drawCircle(int startPointX, int startPointY, int size);
 
+//initiating some global variables
 int red, green, blue, pixelX, pixelY;
 int windowWidth = 640;
 int windowHeight = 640;
+bool endGame = false;
 
 int main(int argc, char *argv[])
 {
@@ -31,40 +37,92 @@ int main(int argc, char *argv[])
 	int menuChoice;
 	// Call CGG::Init to initialise and create your window
 	// Tell it what size you want the window to be
-	
-	menu();
-}
-
-int menu()
-{
-	int menuChoice;
-	system("CLS");
-	//shape ascii lettering
-	std::cout << " ___  _   _    __    ____  ____  ___\n";
-	std::cout << "/ __)( )_( )  /__\\  (  _ \\( ___)/ __)\n";
-	std::cout << "\\__ \\ ) _ (  /(__)\\  )___/ )__) \\__ \\\n";
-	std::cout << "(___/(_) (_)(__)(__)(__)  (____)(___/";
-	std::cout << "\n\n\nDraw a:\n";
-	std::cout << "1. Line      2. Square\n3. Circle    4. Triangle\n\n";
-	std::cout << "Enter your number: ";
-	std::cin >> menuChoice;
-	
-	prepareToDraw(menuChoice);
+	while (!endGame)
+		menu();
 
 	return 0;
+}
+
+int menu()	//function for the menu, leads to other functions
+{
+	int menuChoice;
+	bool exitProgram = false;
+	bool entryValid = false;
+	system("CLS");
+	//shape ascii lettering
+	while (!entryValid)
+	{
+		std::cout << " ___  _   _    __    ____  ____  ___\n";
+		std::cout << "/ __)( )_( )  /__\\  (  _ \\( ___)/ __)\n";
+		std::cout << "\\__ \\ ) _ (  /(__)\\  )___/ )__) \\__ \\\n";
+		std::cout << "(___/(_) (_)(__)(__)(__)  (____)(___/";
+		std::cout << "\n\n\nDraw a:\n";
+		std::cout << "1. Line      2. Square\n3. Circle    4. Triangle\n\n5. Instructions\n6. Exit\n\n";
+		std::cout << "Enter your number: ";
+		std::cin >> menuChoice;
+		if ((menuChoice < 7) && (menuChoice > 0))
+			entryValid = true;
+		else
+		{
+			system("CLS");
+			std::cout << "That option is not valid.";
+			system("PAUSE");
+		}
+	}
+	menuCheck(menuChoice);
+	return 0;
+}
+
+void menuCheck(int optionChosen)	//checks the input for the menu and sends off to other functions depending on the chosen option
+{
+	char exitFS;
+	bool charValid = false;
+	switch (optionChosen)
+	{
+		case 1:	case 2: case 3: case 4:		//calls the function to draw the chosen shape
+			prepareToDraw(optionChosen);
+			break;
+		case 5:		//reads out the instructions
+		{
+			system("CLS");
+			std::cout << "This program shows allows you to chose a shape, \nand then a colour for the shape. \nSome even allow you to choose the size!\n\n";
+			system("PAUSE");
+		}
+			break;
+		case 6:		//starts the exit procedure
+		{
+			while (!charValid)
+			{
+				system("CLS");
+				std::cout << "Are you sure you want to quit? y/n ";
+				std::cin >> exitFS;
+				if ((exitFS == 'y')||(exitFS == 'n'))	//validation or fail safe
+				{
+					charValid = true;
+					if (exitFS == 'y')
+						endGame = true;
+				}
+				else
+				{
+					std::cout << "\nThat is not a valid character.";
+					Sleep(1000);					
+				}
+			}
+		}
+			break;
+	}
 }
 
 void setBackgroundColour()
 {
 	//enter case statement for choosing colour (maybe like 5/6 options)
 	CGG::SetBackground(0, 0, 0);
-}
+}	  //sets the background colour for the window
 
-void setLineColour()
+void setLineColour()	//opens up the choices for the colour of the shape
 {
 	int colourChoice;
 	bool optionValid = false;
-	//same as background colour
 	while (!optionValid)
 	{
 		system("CLS");
@@ -139,9 +197,9 @@ void setLineColour()
 		}
 	}
 	
-}
+}	
 
-int setSize()
+int setSize()	//opens up choices for the sizes for a few shapes, gives the user the option
 {
 	int returnValue, sizeValue;
 	bool optionValid = false;
@@ -179,9 +237,9 @@ int setSize()
 	}
 
 	return returnValue;	
-}
+}	 
 
-int prepareToDraw(int shapeNumber)
+int prepareToDraw(int shapeNumber)	//initiates the drawing procedure for the shapes
 {
 	int size = 0;
 	windowWidth = 640;
@@ -222,7 +280,7 @@ int prepareToDraw(int shapeNumber)
 	return CGG::ShowAndHold();
 }
 
-void drawHorizontalLine(int startPointX, int startPointY, bool directionRight, int size)
+void drawHorizontalLine(int startPointX, int startPointY, bool directionRight, int size)	//draws a horizontal line to a user defined size for the square
 {
 	for (int i = 0; i < size; i++)
 	{
@@ -234,7 +292,7 @@ void drawHorizontalLine(int startPointX, int startPointY, bool directionRight, i
 	}
 }
 
-void drawVerticalLine(int startPointX, int startPointY, bool directionUp, int size)
+void drawVerticalLine(int startPointX, int startPointY, bool directionUp, int size)		//same as the horizontal line but just vertical
 {
 	for (int i = 0; i < size; i++)
 	{
@@ -246,7 +304,7 @@ void drawVerticalLine(int startPointX, int startPointY, bool directionUp, int si
 	}
 }
 
-void drawLine(int startPointX, int startPointY, int size)
+void drawLine(int startPointX, int startPointY, int size)	//draws a diagonal line of a user defined size
 {
 	pixelY = pixelY - (size/2);
 	pixelX = pixelX - (size/2);
@@ -258,7 +316,7 @@ void drawLine(int startPointX, int startPointY, int size)
 	}
 }
 
-void drawSquare(int startPointX, int startPointY, int size)
+void drawSquare(int startPointX, int startPointY, int size)		//uses the other functions to draw the square
 {
 	pixelY = pixelY + (size / 2);
 	pixelX = pixelX - (size / 2);
@@ -268,7 +326,7 @@ void drawSquare(int startPointX, int startPointY, int size)
 	drawVerticalLine(pixelX, pixelY, true, size);
 }
 
-void drawAnyLine(int sPointX, int sPointY, int ePointX, int ePointY)
+void drawAnyLine(int sPointX, int sPointY, int ePointX, int ePointY)	//draws a line to two defined points
 {
 	int dx;
 	int dy;
@@ -295,7 +353,7 @@ void drawAnyLine(int sPointX, int sPointY, int ePointX, int ePointY)
 	}
 }
 
-void drawTriangle()
+void drawTriangle()		//uses the two point line drawing system to draw the triangle from three coordinates
 {
 	int w = 400;
 	int h = 400;
@@ -306,7 +364,7 @@ void drawTriangle()
 	drawAnyLine(sPx, sPy + h, sPx, sPy);
 }	
 
-void drawCircle(int startPointX, int startPointY, int size)
+void drawCircle(int startPointX, int startPointY, int size)		//uses a simple algorithm to draw a circle
 {
 	int x = size;
 	int y = 0;
@@ -335,79 +393,3 @@ void drawCircle(int startPointX, int startPointY, int size)
 		}
 	}
 }
-
-/*int drawSineWave(int startPointX, int startPointY, int size)
-{
-
-}
-
-
-
-
-// Sets every pixel to the same colour
-// parameters are RGBA, numbers are from 0 to 255
-/*CGG::SetBackground( 0,0,0 );
-
-// Preparing a position to draw a pixel
-int pixelX = windowWidth / 2;
-int pixelY = windowHeight / 2;
-
-// Preparing a colour to draw
-int red = 255;
-int green = 0;
-int blue = 0;
-
-
-// Draws a single pixel at the specified coordinates in the specified colour!
-CGG::DrawPixel( pixelX, pixelY, red, green, blue );
-
-for (size_t i = 0; i < 100; i++)
-{
-pixelX++;
-pixelY++;
-CGG::DrawPixel(pixelX, pixelY, red, green, blue);
-}
-/*int sinx, siny;
-for (int i = 0; i < 360; i++)
-{
-siny = sin(i);
-pixelX = i;
-pixelY = siny;
-CGG::DrawPixel(pixelX, pixelY, red, green, blue);
-}*/
-
-
-// Displays drawing to screen and holds until user closes window
-// You must call this after all your drawing calls
-// Program will exit after this line
-//return CGG::ShowAndHold();*/
-
-
-
-
-
-// Advanced access - comment out the above DrawPixel and CGG::ShowAndHold lines, then uncomment the following:
-
-/*
-// Variable to keep track of time
-float timer = 0.0f;
-
-// This is our game loop
-// It will run until the user presses 'escape' or closes the window
-while( CGG::ProcessFrame() )
-{
-// Set every pixel to the same colour
-CGG::SetBackground( 0,0,0 );
-
-// Change our pixel's X coordinate according to time
-pixelX = (windowWidth / 2) + (int)(sin(timer) * 100.0f);
-// Update our time variable
-timer += 1.0f / 60.0f;
-
-// Draw the pixel to the screen
-CGG::DrawPixel( pixelX, pixelY, red, green, blue );
-
-}
-
-return 0;
-*/
