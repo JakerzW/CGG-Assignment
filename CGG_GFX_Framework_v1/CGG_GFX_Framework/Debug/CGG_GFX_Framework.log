@@ -1,5 +1,10 @@
 ﻿  Main.cpp
-c:\users\jaker\onedrive\documents\github\cgg-assignment\cgg_gfx_framework_v1\cgg_gfx_framework\main.cpp(30): warning C4101: 'menuChoice': unreferenced local variable
-c:\users\jaker\onedrive\documents\github\cgg-assignment\cgg_gfx_framework_v1\cgg_gfx_framework\main.cpp(214): warning C4102: 'deafult': unreferenced label
+c:\users\jaker\onedrive\documents\github\cgg-assignment\cgg_gfx_framework_v1\cgg_gfx_framework\main.cpp(31): warning C4101: 'menuChoice': unreferenced local variable
+c:\users\jaker\onedrive\documents\github\cgg-assignment\cgg_gfx_framework_v1\cgg_gfx_framework\main.cpp(219): warning C4102: 'deafult': unreferenced label
+c:\users\jaker\onedrive\documents\github\cgg-assignment\cgg_gfx_framework_v1\cgg_gfx_framework\main.cpp(276): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\jaker\onedrive\documents\github\cgg-assignment\cgg_gfx_framework_v1\cgg_gfx_framework\main.cpp(277): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\jaker\onedrive\documents\github\cgg-assignment\cgg_gfx_framework_v1\cgg_gfx_framework\main.cpp(283): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\jaker\onedrive\documents\github\cgg-assignment\cgg_gfx_framework_v1\cgg_gfx_framework\main.cpp(285): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\jaker\onedrive\documents\github\cgg-assignment\cgg_gfx_framework_v1\cgg_gfx_framework\main.cpp(294): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   CGG_GFX_Framework.vcxproj -> C:\Users\Jaker\OneDrive\Documents\GitHub\CGG-Assignment\CGG_GFX_Framework_v1\Debug\CGG_GFX_Framework.exe
   CGG_GFX_Framework.vcxproj -> C:\Users\Jaker\OneDrive\Documents\GitHub\CGG-Assignment\CGG_GFX_Framework_v1\Debug\CGG_GFX_Framework.pdb (Full PDB)
