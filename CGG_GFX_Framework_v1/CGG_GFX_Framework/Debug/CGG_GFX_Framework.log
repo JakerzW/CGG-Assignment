@@ -1,5 +1,5 @@
 ﻿  Main.cpp
-c:\users\jaker\onedrive\documents\github\cgg-assignment\cgg_gfx_framework_v1\cgg_gfx_framework\main.cpp(20): warning C4101: 'menuChoice': unreferenced local variable
-c:\users\jaker\onedrive\documents\github\cgg-assignment\cgg_gfx_framework_v1\cgg_gfx_framework\main.cpp(159): warning C4102: 'deafult': unreferenced label
-  CGG_GFX_Framework.vcxproj -> C:\Users\Jaker\OneDrive\Documents\GitHub\CGG-Assignment\CGG_GFX_Framework_v1\Debug\CGG_GFX_Framework.exe
-  CGG_GFX_Framework.vcxproj -> C:\Users\Jaker\OneDrive\Documents\GitHub\CGG-Assignment\CGG_GFX_Framework_v1\Debug\CGG_GFX_Framework.pdb (Full PDB)
+c:\users\jaker\documents\github\cgg-assignment\cgg_gfx_framework_v1\cgg_gfx_framework\main.cpp(23): warning C4101: 'menuChoice': unreferenced local variable
+c:\users\jaker\documents\github\cgg-assignment\cgg_gfx_framework_v1\cgg_gfx_framework\main.cpp(165): warning C4102: 'deafult': unreferenced label
+  CGG_GFX_Framework.vcxproj -> C:\Users\Jaker\Documents\GitHub\CGG-Assignment\CGG_GFX_Framework_v1\Debug\CGG_GFX_Framework.exe
+  CGG_GFX_Framework.vcxproj -> C:\Users\Jaker\Documents\GitHub\CGG-Assignment\CGG_GFX_Framework_v1\Debug\CGG_GFX_Framework.pdb (Full PDB)

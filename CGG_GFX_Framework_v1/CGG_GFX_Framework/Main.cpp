@@ -7,7 +7,10 @@
 int menu();
 void setLineColour();
 void setBackgroundColour();
-int drawLine();
+int drawLine(int startPointX, int startPointY);
+int drawHorizontalLine(int startPointX, int startPointY);
+int drawSquare(int startPointX, int startPointY);
+int drawVerticalLine(int startPointX, int startPointY);
 int prepareToDraw(int shapeNumber);
 
 int red, green, blue, pixelX, pixelY;
@@ -15,8 +18,8 @@ int red, green, blue, pixelX, pixelY;
 int main(int argc, char *argv[])
 {
 	// Variables for storing window dimensions
-	int windowWidth = 1280;
-	int windowHeight = 720;
+	int windowWidth = 640;
+	int windowHeight = 640;
 	int menuChoice;
 	// Call CGG::Init to initialise and create your window
 	// Tell it what size you want the window to be
@@ -28,9 +31,13 @@ int menu()
 {
 	int menuChoice;
 	system("CLS");
-	std::cout << "Shapes";
-	std::cout << "\n\n\nDraw a:\n\n";
-	std::cout << "1. Line\n\n";
+	//shape ascii lettering
+	std::cout << " ___  _   _    __    ____  ____  ___\n";
+	std::cout << "/ __)( )_( )  /__\\  (  _ \\( ___)/ __)\n";
+	std::cout << "\\__ \\ ) _ (  /(__)\\  )___/ )__) \\__ \\\n";
+	std::cout << "(___/(_) (_)(__)(__)(__)  (____)(___/";
+	std::cout << "\n\n\nDraw a:\n";
+	std::cout << "1. Line      2. Square\n3. Circle    4. Triangle\n\n";
 	std::cout << "Enter your number: ";
 	std::cin >> menuChoice;
 	
@@ -67,58 +74,58 @@ void setLineColour()
 	{
 		case 1:
 		{
-			int red = 255;
-			int green = 0;
-			int blue = 0;
+			red = 255;
+			green = 0;
+			blue = 0;
 		}
 			break;
 		case 2:
 		{
-			int red = 0;
-			int green = 0;
-			int blue = 255;
+			red = 0;
+			green = 0;
+			blue = 255;
 		}
 			break;
 		case 3:
 		{
-			int red = 0;
-			int green = 255;
-			int blue = 0;
+			red = 0;
+			green = 255;
+			blue = 0;
 		}
 			break;
 		case 4:
 		{
-			int red = 255;
-			int green = 255;
-			int blue = 0;
+			red = 255;
+			green = 255;
+			blue = 0;
 		}
 			break;
 		case 5:
 		{
-			int red = 255;
-			int green = 0;
-			int blue = 255;
+			red = 255;
+			green = 0;
+			blue = 255;
 		}
 			break;
 		case 6:
 		{
-			int red = 0;
-			int green = 255;
-			int blue = 255;
+			red = 0;
+			green = 255;
+			blue = 255;
 		}
 			break;
 		case 7:
 		{
-			int red = 255;
-			int green = 255;
-			int blue = 255;
+			red = 255;
+			green = 255;
+			blue = 255;
 		}
 			break;
 		default:
 		{
-			int red = 255;
-			int green = 255;
-			int blue = 255;
+			red = 255;
+			green = 255;
+			blue = 255;
 		}
 	}
 	
@@ -127,8 +134,8 @@ void setLineColour()
 int prepareToDraw(int shapeNumber)
 {
 
-	int windowWidth = 1280;
-	int windowHeight = 720;
+	int windowWidth = 640;
+	int windowHeight = 640;
 	int pixelX = windowWidth / 2;
 	int pixelY = windowHeight / 2;
 
@@ -147,32 +154,65 @@ int prepareToDraw(int shapeNumber)
 	{
 		case 1:
 		{
-			for (size_t i = 0; i < 100; i++)
-			{
-				pixelX++;
-				pixelY++;
-				CGG::DrawPixel(pixelX, pixelY, red, green, blue);
-			}
-			return CGG::ShowAndHold();
+			drawLine(pixelX, pixelY);
 		}
-			//drawLine();
+		break;
+		case 2:
+		{
+			drawSquare(pixelX, pixelY);
+		}
+		break;
 		deafult:
 			CGG::DrawPixel(pixelX, pixelY, red, green, blue);
 	}
 	return 0;
 }
 
-int drawLine()
+int drawHorizontalLine(int startPointX, int startPointY, bool directionRight)
 {
 	for (size_t i = 0; i < 100; i++)
 	{
-		pixelX++;
+		if (!directionRight)
+			pixelX--;
+		else
+			pixelX++;
+		CGG::DrawPixel(pixelX, pixelY, red, green, blue);
+	}
+	return 0;
+}
+
+int drawVerticalLine(int startPointX, int startPointY, bool directionUp)
+{
+	for (size_t i = 0; i < 100; i++)
+	{
+		if (!directionUp)
+			pixelY--;
+		else 
+			pixelY++;
+		CGG::DrawPixel(pixelX, pixelY, red, green, blue);
+	}
+	return 0;
+}
+
+int drawLine(int startPointX, int startPointY)
+{
+	for (size_t i = 0; i < 100; i++)
+	{
 		pixelY++;
+		pixelX++;
 		CGG::DrawPixel(pixelX, pixelY, red, green, blue);
 	}
 	return CGG::ShowAndHold();
 }
 
+int drawSquare(int startPointX, int startPointY)
+{
+	drawHorizontalLine(pixelX, pixelY, true);
+	drawVerticalLine(pixelX, pixelY, false);
+	drawHorizontalLine(pixelX, pixelY, false);
+	drawVerticalLine(pixelX, pixelY, true);
+	return CGG::ShowAndHold();
+}
 
 
 
