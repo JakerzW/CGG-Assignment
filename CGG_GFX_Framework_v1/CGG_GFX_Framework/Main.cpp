@@ -41,8 +41,7 @@ int menu()
 	std::cout << "Enter your number: ";
 	std::cin >> menuChoice;
 	
-	if (menuChoice = 1)
-		prepareToDraw(menuChoice);
+	prepareToDraw(menuChoice);
 
 	return 0;
 }
@@ -68,6 +67,7 @@ void setLineColour()
 			optionValid = true;
 		else
 			std::cout << "That is not a valid input, try again.";
+		system("PAUSE");
 	}
 
 	switch (colourChoice)
@@ -131,13 +131,34 @@ void setLineColour()
 	
 }
 
+int setSize()
+{
+	int sizeValue;
+	bool optionValid;
+	while (!optionValid)
+	{
+		system("CLS");
+		std::cout << "Sizes:\n1. Tiny     2. Small\n3. Big     4. Massive\n";
+		std::cout << "Choose a size: ";
+		std::cin >> sizeValue;
+		if ((sizeValue < 5) || (sizeValue > 0))
+			optionValid = true;
+		else
+		{
+			std::cout << "That option is not valid.";
+			system("PAUSE");
+		}
+	}
+	return sizeValue;
+}
+
 int prepareToDraw(int shapeNumber)
 {
 
 	int windowWidth = 640;
 	int windowHeight = 640;
-	int pixelX = windowWidth / 2;
-	int pixelY = windowHeight / 2;
+	pixelX = windowWidth / 2;
+	pixelY = windowHeight / 2;
 
 	setBackgroundColour();
 	setLineColour();
@@ -194,9 +215,11 @@ int drawVerticalLine(int startPointX, int startPointY, bool directionUp)
 	return 0;
 }
 
-int drawLine(int startPointX, int startPointY)
+int drawLine(int startPointX, int startPointY, int size)
 {
-	for (size_t i = 0; i < 100; i++)
+	pixelY = pixelY - 100;
+	pixelX = pixelX - 100;
+	for (size_t i = 0; i < 200; i++)
 	{
 		pixelY++;
 		pixelX++;
@@ -205,7 +228,7 @@ int drawLine(int startPointX, int startPointY)
 	return CGG::ShowAndHold();
 }
 
-int drawSquare(int startPointX, int startPointY)
+int drawSquare(int startPointX, int startPointY, int size)
 {
 	drawHorizontalLine(pixelX, pixelY, true);
 	drawVerticalLine(pixelX, pixelY, false);
